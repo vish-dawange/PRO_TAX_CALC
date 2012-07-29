@@ -1,0 +1,1 @@
+create or replace procedure sp_insert (id in varchar2, f_name in varchar2, l_name in varchar2, addr in varchar2, contact in number, salary in number, commission in number, sales in number) is begin insert into sales_person(id,f_name,l_name,addr,contact,salary,commission,sales) values(id,f_name,l_name,addr,contact,salary,commission,sales); end;

@@ -1,0 +1,18 @@
+CUSTINFO                       TABLE
+
+OPENPLOTINFO                   TABLE
+
+SURVEYINFO                     TABLE
+
+RESTAX                         TABLE
+COMTAX                         TABLE
+
+
+RATE                           TABLE
+
+TAXCALINFO                     TABLE
+
+BILLINFO                       TABLE
+
+
+172 rows selected.

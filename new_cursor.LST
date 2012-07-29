@@ -1,0 +1,117 @@
+SQL> select * from custinfo;
+
+   CUST_ID NAME                           ADDR                                  
+---------- ------------------------------ ------------------------------        
+     SYEAR                                                                      
+----------                                                                      
+         1 Divya                          Saswad                                
+      2005                                                                      
+                                                                                
+         2 Amit                           Pune                                  
+      2007                                                                      
+                                                                                
+         3 Shalaka                        Nigdi                                 
+      2010                                                                      
+                                                                                
+
+   CUST_ID NAME                           ADDR                                  
+---------- ------------------------------ ------------------------------        
+     SYEAR                                                                      
+----------                                                                      
+         4 Mayur                          Aurangabad                            
+      2010                                                                      
+                                                                                
+         5 Sabiya                         Swargate                              
+      2011                                                                      
+                                                                                
+         6 Kanchan                        Chinchwad                             
+      2009                                                                      
+                                                                                
+
+   CUST_ID NAME                           ADDR                                  
+---------- ------------------------------ ------------------------------        
+     SYEAR                                                                      
+----------                                                                      
+         7 Kapil                          Pune                                  
+      2011                                                                      
+                                                                                
+
+7 rows selected.
+
+SQL> closecursor OFF
+linesize 80
+linesize 80
+flagger OFF
+select * from custinfo;
+
+   CUST_ID NAME                           ADDR                                SYEAR                                                                                                 
+---------- ------------------------------ ------------------------------ ----------                                                                                                 
+         1 Divya                          Saswad                               2005                                                                                                 
+         2 Amit                           Pune                                 2007                                                                                                 
+         3 Shalaka                        Nigdi                                2010                                                                                                 
+         4 Mayur                          Aurangabad                           2010                                                                                                 
+         5 Sabiya                         Swargate                             2011                                                                                                 
+         6 Kanchan                        Chinchwad                            2009                                                                                                 
+         7 Kapil                          Pune                                 2011                                                                                                 
+
+7 rows selected.
+
+SQL> ed newc.sql;
+
+SQL> start newc.sql
+ 12  /
+ /
+ *
+ERROR at line 11:
+ORA-06550: line 11, column 2: 
+PLS-00103: Encountered the symbol "/" The symbol "/" was ignored. 
+
+
+SQL> get C:\oracle\ora92\bin\newc.sql
+  1  declare
+  2     cursor c_countCust is select count(*) count, sum(final_tax) sum from billinfo;
+  3     r_testRec c_countCust%ROWTYPE;
+  4     begin
+  5     open c_countCust;
+  6     fetch c_countCust into r_testRec;
+  7      close c_countCust;
+  8     DBMS_OUTPUT.put_line('number of customers is:'||r_testRec.count);
+  9     DBMS_OUTPUT.put_line('sum of tax is:'||r_testRec.sum);
+ 10    end;
+ 11*  /
+SQL> start newc.sql;
+ 12  /
+ /
+ *
+ERROR at line 11:
+ORA-06550: line 11, column 2: 
+PLS-00103: Encountered the symbol "/" The symbol "/" was ignored. 
+
+
+SQL>  declare
+  2      cursor c_countCust is select count(*) count, sum(final_tax) sum from billinfo;
+  3      r_testRec c_countCust%ROWTYPE;
+  4      begin
+  5      open c_countCust;
+  6      fetch c_countCust into r_testRec;
+  7       close c_countCust;
+  8      DBMS_OUTPUT.put_line('number of customers is:'||r_testRec.count);
+  9      DBMS_OUTPUT.put_line('sum of tax is:'||r_testRec.sum);
+ 10     end;
+ 11  /
+number of customers is:4                                                                                                                                                            
+sum of tax is:136168.9                                                                                                                                                              
+
+PL/SQL procedure successfully completed.
+
+Commit complete.
+SQL> select * from billinfo;
+
+BILL_I    CUST_ID INSTALMENTS  FINAL_TAX                                                                                                                                            
+------ ---------- ----------- ----------                                                                                                                                            
+B1              1           2       1500                                                                                                                                            
+B2              2           2    79521.4                                                                                                                                            
+B3              3           1    16159.5                                                                                                                                            
+B4              5           1      38988                                                                                                                                            
+
+SQL> spool off;

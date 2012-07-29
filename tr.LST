@@ -1,0 +1,255 @@
+SQL> select * from billinfo;
+
+BILL_I    CUST_ID INSTALMENTS  FINAL_TAX                                        
+------ ---------- ----------- ----------                                        
+B1              1           2       1500                                        
+B2              2           2    79521.4                                        
+B3              3           1    16159.5                                        
+B4              5           1      38988                                        
+
+SQL> create trigger tr1
+  2  
+  3  
+  4  end;
+  5  /
+end;
+*
+ERROR at line 4:
+ORA-04071: missing BEFORE, AFTER or INSTEAD OF keyword 
+
+
+SQL> create or replace trigger tr1
+  2  before
+  3  insert
+  4  on billinfo
+  5  for each row
+  6  begin
+  7  if :new.final_tax < 1000
+  8  then
+  9  raise_application_error(-20001,'tax must be greater than 1000');
+ 10  end if;
+ 11  end;
+ 12  /
+
+Trigger created.
+
+SQL> insert into billinfo(bill_id,cust_id,instalments,final_tax) values('B5',4,3,800);
+insert into billinfo(bill_id,cust_id,instalments,final_tax) values('B5',4,3,800)
+            *
+ERROR at line 1:
+ORA-20001: tax must be greater than 1000 
+ORA-06512: at "SCOTT.TR1", line 4 
+ORA-04088: error during execution of trigger 'SCOTT.TR1' 
+
+
+SQL> insert into billinfo(bill_id,cust_id,instalments,final_tax) values('B5',4,3,1500);
+
+1 row created.
+
+Commit complete.
+SQL> insert into billinfo(bill_id,cust_id,instalments,final_tax) values('B6',4,5,200);
+insert into billinfo(bill_id,cust_id,instalments,final_tax) values('B6',4,5,200)
+            *
+ERROR at line 1:
+ORA-20001: tax must be greater than 1000 
+ORA-06512: at "SCOTT.TR1", line 4 
+ORA-04088: error during execution of trigger 'SCOTT.TR1' 
+
+
+SQL> insert into billinfo(bill_id,cust_id,instalments,final_tax) values('B6',4,5,1001);
+
+1 row created.
+
+Commit complete.
+SQL> select * from billinfo;
+
+BILL_I    CUST_ID INSTALMENTS  FINAL_TAX                                        
+------ ---------- ----------- ----------                                        
+B1              1           2       1500                                        
+B2              2           2    79521.4                                        
+B3              3           1    16159.5                                        
+B4              5           1      38988                                        
+B5              4           3       1500                                        
+B6              4           5       1001                                        
+
+6 rows selected.
+
+SQL> delete from billinfo where bill_id=B6;
+delete from billinfo where bill_id=B6
+                                   *
+ERROR at line 1:
+ORA-00904: "B6": invalid identifier 
+
+
+SQL> delete from billinfo where bill_id='B6';
+
+1 row deleted.
+
+Commit complete.
+SQL> delete from billinfo where bill_id='B6
+  2  
+SQL> delete from billinfo where bill_id='B5';
+
+1 row deleted.
+
+Commit complete.
+SQL> select * from billinfo;
+
+BILL_I    CUST_ID INSTALMENTS  FINAL_TAX                                        
+------ ---------- ----------- ----------                                        
+B1              1           2       1500                                        
+B2              2           2    79521.4                                        
+B3              3           1    16159.5                                        
+B4              5           1      38988                                        
+
+SQL> create trigger tr2
+  2  befo
+  3  
+  4  /
+befo
+*
+ERROR at line 2:
+ORA-04071: missing BEFORE, AFTER or INSTEAD OF keyword 
+
+
+SQL> create or replace trigger tr2
+  2  before
+  3  on insert or update
+  4  for each row
+  5  begin
+  6  if/
+  7  /
+on insert or update
+*
+ERROR at line 3:
+ORA-04072: invalid trigger type 
+
+
+SQL> create or replace trigger tr2
+  2  before
+  3  insert or update
+  4  on surveyinfo
+  5  for each row
+  6  begin
+  7  if :new.type!='A'
+  8  then
+  9  raise_application error(-20002,'Type is invalid........');
+ 10  end if;
+ 11  end;
+ 12  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> show error
+Errors for TRIGGER TR2:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+4/19     PLS-00103: Encountered the symbol "ERROR" when expecting one of        
+         the following:                                                         
+         := . ( @ % ;                                                           
+         The symbol ":=" was substituted for "ERROR" to continue.               
+                                                                                
+SQL> create or replace trigger tr3
+  2  before
+  3  insert
+  4  on surveyinfo
+  5  for each row
+  6  begin
+  7  if :new.area >=1000
+  8  then
+  9  raise_application_error(-20004,'AREA MUST BE LESS THAN 1000 SQM');
+ 10  end if;
+ 11  end;
+ 12  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> show error
+Errors for TRIGGER TR3:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+2/4      PLS-00049: bad bind variable 'NEW.AREA'                                
+SQL> create or replace trigger tr3
+  2  before
+  3  insert
+  4  on surveyinfo
+  5  for each row
+  6  begin
+  7  if :new.area_sqm >=1000
+  8   then
+  9   raise_application_error(-20004,'AREA MUST BE LESS THAN 1000 SQM');
+ 10   end if;
+ 11   end;
+ 12   /
+ 13  
+ 14  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> show error
+Errors for TRIGGER TR3:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+7/2      PLS-00103: Encountered the symbol "/" The symbol "/" was ignored.      
+                                                                                
+                                                                                
+SQL> 
+SQL> 
+SQL> 
+SQL> create or replace trigger tr3
+  2  before
+  3  insert
+  4  on surveyinfo
+  5  for each row
+  6  begin
+  7  if :new.area_sqm >=1000
+  8  then
+  9  raise_application_error(-20003,'Area must be less than 1000');
+ 10  end if;
+ 11  end;
+ 12  /
+
+Trigger created.
+
+SQL> select * from surveyinfo;
+
+   CUST_ID      SR_NO     ZONENO   AREA_SQM T      ROOMS FLOOR         TOT_AMT  
+---------- ---------- ---------- ---------- - ---------- ---------- ----------  
+         3        200         10        500 C          2 Ground           3150  
+         2        201         11        600 B          3 first            4320  
+         5        202         10        800 A          4 second           7600  
+         4        205         10        500 D          3 ground           3450  
+
+SQL> insert into surveyinfo values(1,210,12,1200,'A',3,'first',4567);
+insert into surveyinfo values(1,210,12,1200,'A',3,'first',4567)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> create or replace trigger tr3
+  2  before
+  3  insert
+  4  on surveyinfo
+  5  for each row
+  6  begin
+  7  if :new.area_sqm >=1000
+  8  then
+  9  raise_application_error(-20003,'Area must be less than 1000');
+ 10  end if;
+ 11  end;
+ 12  /
+
+Trigger created.
+
+SQL> insert into surveyinfo(cust_id,sr_no,zoneno,area_sqm,type,rooms,floor,tot_amt) values(1,210,12,1200,'A',3,'first',4567);
+insert into surveyinfo(cust_id,sr_no,zoneno,area_sqm,type,rooms,floor,tot_amt) values(1,210,12,1200,'A',3,'first',4567)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> spool off;

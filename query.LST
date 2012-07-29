@@ -1,0 +1,598 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BILLINFO                       TABLE                                            
+BONUS                          TABLE                                            
+COMTAX                         TABLE                                            
+CUSTINFO                       TABLE                                            
+DEPT                           TABLE                                            
+EMP                            TABLE                                            
+OPENPLOTINFO                   TABLE                                            
+RATE                           TABLE                                            
+RESTAX                         TABLE                                            
+SALGRADE                       TABLE                                            
+SURVEYINFO                     TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+TAXCALINFO                     TABLE                                            
+
+12 rows selected.
+
+SQL> drop table restax;
+
+Table dropped.
+
+SQL> drop table comtax;
+
+Table dropped.
+
+SQL> create table restax(rtax_no, varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val number(9,2), net_val number(9,2), gen_tax number(8,2), con_tax number(8,2), state_edn_tax number(8,2), fire number(8,2), tree number(8,2), water number(8,2), street number(8,2), drainage number(8,2));
+create table restax(rtax_no, varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val number(9,2), net_val number(9,2), gen_tax number(8,2), con_tax number(8,2), state_edn_tax number(8,2), fire number(8,2), tree number(8,2), water number(8,2), street number(8,2), drainage number(8,2))
+                             *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL>  create table restax(rtax_no varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val number(9,2), net_val number(9,2), gen_tax number(8,2), con_tax number(8,2), state_edn_tax number(8,2), fire number(8,2), tree number(8,2), water number(8,2), street number(8,2), dra
+  2  inage number(8,2));
+inage number(8,2))
+      *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL>  create table restax(rtax_no varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val nSQL>  create table restax(rtax_no varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val ninage number(8,2));
+ create table restax(rtax_no varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val nSQL>  create table restax(rtax_no varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val ninage number(8,2))
+                                                                                                                                                                                  *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL>  create table restax(rtax_no, varchar2(6) primary key,sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(8,2), ret_val n
+  2  
+SQL> create table restax(rtax_no
+  2  
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> r(9,2), ann_rent number(9,2), disc number(8,2), ret_val n
+  1* create table restax(rtax_no
+create table restax(rtax_no
+                          *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> 
+SQL> create table restax(rtax_no varchar2(6) primary key, sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(9,2), ret_val number(9,2), net_val number(9,2), gen_tax number(8,2), con_tax number(8,2), state_edn number(8,2), fire number(8,2), tree number(8,2), water number(8,2), street number(8,2), drainage number(8,2));
+
+Table created.
+
+SQL> create table comtax(ctax_no varchar2(6) primary key,  sr_no number(5) references surveyinfo(sr_no), tot_exp_rent number(9,2), ann_rent number(9,2), disc number(9,2), ret_val number(9,2), net_val number(9,2), gen_tax number(8,2),  con_tax number(8,2), state_edn number(8,2), fire number(8,2), tree number(8,2),water number(8,2), street number(8,2), drainage number(8,2) ,eg_tax number(8,2));
+
+Table created.
+
+SQL> alter table surveyinfo add(tot_amt number(9,2));
+
+Table altered.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BILLINFO                       TABLE                                            
+BONUS                          TABLE                                            
+COMTAX                         TABLE                                            
+CUSTINFO                       TABLE                                            
+DEPT                           TABLE                                            
+EMP                            TABLE                                            
+OPENPLOTINFO                   TABLE                                            
+RATE                           TABLE                                            
+RESTAX                         TABLE                                            
+SALGRADE                       TABLE                                            
+SURVEYINFO                     TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+TAXCALINFO                     TABLE                                            
+
+12 rows selected.
+
+SQL> desc custinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL NUMBER(5)
+ NAME                                               VARCHAR2(30)
+ ADDR                                               VARCHAR2(30)
+ SYEAR                                              NUMBER(4)
+
+SQL> desc openplotinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                            NUMBER(5)
+ SURVEY_NO                                 NOT NULL NUMBER(5)
+ PLOT_NO                                            NUMBER(4)
+ REG_NO                                             VARCHAR2(6)
+ TYPE                                               CHAR(1)
+ AREA_SQ_M                                          NUMBER(8,2)
+ RATE_PER_SQM                                       NUMBER(8,2)
+ ZONE_NO                                            NUMBER(3)
+ EFF_FRM                                            VARCHAR2(15)
+ TOTAL_TAX                                          NUMBER(8,2)
+
+SQL> desc surveyinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                            NUMBER(5)
+ SR_NO                                     NOT NULL NUMBER(5)
+ ZONENO                                             NUMBER(3)
+ AREA_SQM                                           NUMBER(8,2)
+ TYPE                                               CHAR(1)
+ ROOMS                                              NUMBER(2)
+ FLOOR                                              VARCHAR2(10)
+ TOT_AMT                                            NUMBER(9,2)
+
+SQL> desc restax;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RTAX_NO                                   NOT NULL VARCHAR2(6)
+ SR_NO                                              NUMBER(5)
+ TOT_EXP_RENT                                       NUMBER(9,2)
+ ANN_RENT                                           NUMBER(9,2)
+ DISC                                               NUMBER(9,2)
+ RET_VAL                                            NUMBER(9,2)
+ NET_VAL                                            NUMBER(9,2)
+ GEN_TAX                                            NUMBER(8,2)
+ CON_TAX                                            NUMBER(8,2)
+ STATE_EDN                                          NUMBER(8,2)
+ FIRE                                               NUMBER(8,2)
+ TREE                                               NUMBER(8,2)
+ WATER                                              NUMBER(8,2)
+ STREET                                             NUMBER(8,2)
+ DRAINAGE                                           NUMBER(8,2)
+
+SQL> desc comtax;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CTAX_NO                                   NOT NULL VARCHAR2(6)
+ SR_NO                                              NUMBER(5)
+ TOT_EXP_RENT                                       NUMBER(9,2)
+ ANN_RENT                                           NUMBER(9,2)
+ DISC                                               NUMBER(9,2)
+ RET_VAL                                            NUMBER(9,2)
+ NET_VAL                                            NUMBER(9,2)
+ GEN_TAX                                            NUMBER(8,2)
+ CON_TAX                                            NUMBER(8,2)
+ STATE_EDN                                          NUMBER(8,2)
+ FIRE                                               NUMBER(8,2)
+ TREE                                               NUMBER(8,2)
+ WATER                                              NUMBER(8,2)
+ STREET                                             NUMBER(8,2)
+ DRAINAGE                                           NUMBER(8,2)
+ EG_TAX                                             NUMBER(8,2)
+
+SQL> desc taxcalinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ T_NO                                      NOT NULL NUMBER(5)
+ SR_NO                                              NUMBER(5)
+ CUR_TOTAL                                          NUMBER(6,2)
+ PENDING                                            NUMBER(6,2)
+ TOT_TAX                                            NUMBER(7,2)
+
+SQL> desc billinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BILL_ID                                   NOT NULL VARCHAR2(6)
+ CUST_ID                                            NUMBER(5)
+ INSTALMENTS                                        NUMBER(2)
+ FINAL_TAX                                          NUMBER(7,2)
+
+SQL> desc rate;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TAX_ID                                    NOT NULL NUMBER(5)
+ TAX_NAME                                           VARCHAR2(30)
+ TAX_RATE                                           NUMBER(8,2)
+
+SQL> insert into custinfo values('&cust
+  2  
+SQL> select * from custinfo;
+
+   CUST_ID NAME                           ADDR                                  
+---------- ------------------------------ ------------------------------        
+     SYEAR                                                                      
+----------                                                                      
+         1 Divya                          Saswad                                
+      2005                                                                      
+                                                                                
+         2 Amit                           Pune                                  
+      2007                                                                      
+                                                                                
+         3 Shalaka                        Nigdi                                 
+      2010                                                                      
+                                                                                
+
+   CUST_ID NAME                           ADDR                                  
+---------- ------------------------------ ------------------------------        
+     SYEAR                                                                      
+----------                                                                      
+         4 Mayur                          Aurangabad                            
+      2010                                                                      
+                                                                                
+         5 Sabiya                         Swargate                              
+      2011                                                                      
+                                                                                
+
+SQL> autotrace OFF
+linesize 80
+linesize 80
+flagger OFF
+selct * from custinfo;
+SP2-0734: unknown command beginning "selct * fr..." - rest of line ignored.
+SQL> select * from custinfo;
+
+   CUST_ID NAME                           ADDR                                SYEAR                                                                                                 
+---------- ------------------------------ ------------------------------ ----------                                                                                                 
+         1 Divya                          Saswad                               2005                                                                                                 
+         2 Amit                           Pune                                 2007                                                                                                 
+         3 Shalaka                        Nigdi                                2010                                                                                                 
+         4 Mayur                          Aurangabad                           2010                                                                                                 
+         5 Sabiya                         Swargate                             2011                                                                                                 
+
+SQL> insert into custinfo values(6,'Kanchan','Chinchwad',2009);
+
+1 row created.
+
+Commit complete.
+SQL> select * from openplotinfo;
+
+   CUST_ID  SURVEY_NO    PLOT_NO REG_NO T  AREA_SQ_M RATE_PER_SQM    ZONE_NO EFF_FRM          TOTAL_TAX                                                                             
+---------- ---------- ---------- ------ - ---------- ------------ ---------- --------------- ----------                                                                             
+         1        101        408 RO101  A          7            5          3 1999                  1500                                                                             
+         2        102        409 RO102  B        800            6          4 1998                  1000                                                                             
+
+SQL> select *from surveyinfo;
+
+   CUST_ID      SR_NO     ZONENO   AREA_SQM T      ROOMS FLOOR         TOT_AMT                                                                                                      
+---------- ---------- ---------- ---------- - ---------- ---------- ----------                                                                                                      
+         3        200         10        500 C          2 Ground                                                                                                                     
+         2        201         11        600 B          3 first                                                                                                                      
+         5        202         12        800 A          4 second                                                                                                                     
+
+SQL> select *from rate;
+
+    TAX_ID TAX_NAME                         TAX_RATE                                                                                                                                
+---------- ------------------------------ ----------                                                                                                                                
+         1 Water                                  10                                                                                                                                
+         2 Electricity                             5                                                                                                                                
+         3 tree                                    4                                                                                                                                
+         4 Eduction                                5                                                                                                                                
+         5 drainage                                4                                                                                                                                
+
+SQL> truncate table rate;
+
+Table truncated.
+
+SQL> desc rate;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ TAX_ID                                                                                                NOT NULL NUMBER(5)
+ TAX_NAME                                                                                                       VARCHAR2(30)
+ TAX_RATE                                                                                                       NUMBER(8,2)
+
+SQL> insert into rate
+ de values('&tax_id','&tax_name','&tax_rate');
+Enter value for tax_id: 1
+Enter value for tax_name: r_A
+Enter value for tax_rate: 9.50
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('1','r_A','9.50')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 2
+Enter value for tax_name: r_B
+Enter value for tax_rate: 7.20
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('2','r_B','7.20')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 3
+Enter value for tax_name: r_C
+Enter value for tax_rate: 6.30
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('3','r_C','6.30')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 4
+Enter value for tax_name: r_D
+Enter value for tax_rate: 3.10
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('4','r_D','3.10')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 5
+Enter value for tax_name: r_gen
+Enter value for tax_rate: 30
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('5','r_gen','30')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 6
+Enter value for tax_name: r_con
+Enter value for tax_rate: 3
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('6','r_con','3')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 7
+Enter value for tax_name: r_edn
+Enter value for tax_rate: 7
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('7','r_edn','7')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 8
+Enter value for tax_name: r_fire
+Enter value for tax_rate: 1.5
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('8','r_fire','1.5')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 9
+Enter value for tax_name: r_tree
+Enter value for tax_rate: 1
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('9','r_tree','1')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 10
+Enter value for tax_name: r_street
+Enter value for tax_rate: 2
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('10','r_street','2')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 11
+Enter value for tax_name: r_water
+Enter value for tax_rate: 1.5
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('11','r_water','1.5')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 12
+Enter value for tax_name: r_drainage
+Enter value for tax_rate: 1.5
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('12','r_drainage','1.5')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 13
+Enter value for tax_name: c_A
+Enter value for tax_rate: 22.60
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('13','c_A','22.60')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 14
+Enter value for tax_name: c_B
+Enter value for tax_rate: 18.50
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('14','c_B','18.50')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 15
+Enter value for tax_name: c_C
+Enter value for tax_rate: 13.00
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('15','c_C','13.00')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 16
+Enter value for tax_name: c_D
+Enter value for tax_rate: 9.60
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('16','c_D','9.60')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 17
+Enter value for tax_name: c_gen
+Enter value for tax_rate: 40
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('17','c_gen','40')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 18
+Enter value for tax_name: c_con
+Enter value for tax_rate: 8
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('18','c_con','8')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 19
+Enter value for tax_name: c_edn
+Enter value for tax_rate: 7
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('19','c_edn','7')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 20
+Enter value for tax_name: c_fire
+Enter value for tax_rate: 1.5
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('20','c_fire','1.5')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 21
+Enter value for tax_name: c_tree
+Enter value for tax_rate: 1
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('21','c_tree','1')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 22
+Enter value for tax_name: c_street
+Enter value for tax_rate: 2
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('22','c_street','2')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 23
+Enter value for tax_name: c_water
+Enter value for tax_rate: 1.5
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('23','c_water','1.5')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 24
+Enter value for tax_name: c_drainage
+Enter value for tax_rate: 1.5
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('24','c_drainage','1.5')
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for tax_id: 25
+Enter value for tax_name: c_eg
+Enter value for tax_rate: 3
+old   2: values('&tax_id','&tax_name','&tax_rate')
+new   2: values('25','c_eg','3')
+
+1 row created.
+
+Commit complete.
+SQL> select * from rate;
+
+    TAX_ID TAX_NAME                         TAX_RATE                                                                                                                                
+---------- ------------------------------ ----------                                                                                                                                
+         1 r_A                                   9.5                                                                                                                                
+         2 r_B                                   7.2                                                                                                                                
+         3 r_C                                   6.3                                                                                                                                
+         4 r_D                                   3.1                                                                                                                                
+         5 r_gen                                  30                                                                                                                                
+         6 r_con                                   3                                                                                                                                
+         7 r_edn                                   7                                                                                                                                
+         8 r_fire                                1.5                                                                                                                                
+         9 r_tree                                  1                                                                                                                                
+        10 r_street                                2                                                                                                                                
+        11 r_water                               1.5                                                                                                                                
+
+    TAX_ID TAX_NAME                         TAX_RATE                                                                                                                                
+---------- ------------------------------ ----------                                                                                                                                
+        12 r_drainage                            1.5                                                                                                                                
+        13 c_A                                  22.6                                                                                                                                
+        14 c_B                                  18.5                                                                                                                                
+        15 c_C                                    13                                                                                                                                
+        16 c_D                                   9.6                                                                                                                                
+        17 c_gen                                  40                                                                                                                                
+        18 c_con                                   8                                                                                                                                
+        19 c_edn                                   7                                                                                                                                
+        20 c_fire                                1.5                                                                                                                                
+        21 c_tree                                  1                                                                                                                                
+        22 c_street                                2                                                                                                                                
+
+    TAX_ID TAX_NAME                         TAX_RATE                                                                                                                                
+---------- ------------------------------ ----------                                                                                                                                
+        23 c_water                               1.5                                                                                                                                
+        24 c_drainage                            1.5                                                                                                                                
+        25 c_eg                                    3                                                                                                                                
+
+25 rows selected.
+
+SQL> select * from surveyinfo;
+
+   CUST_ID      SR_NO     ZONENO   AREA_SQM T      ROOMS FLOOR         TOT_AMT                                                                                                      
+---------- ---------- ---------- ---------- - ---------- ---------- ----------                                                                                                      
+         3        200         10        500 C          2 Ground                                                                                                                     
+         2        201         11        600 B          3 first                                                                                                                      
+         5        202         12        800 A          4 second                                                                                                                     
+
+SQL> insert into surveyinfo(tot_amt) values(4750) where cust_id=3;
+insert into surveyinfo(tot_amt) values(4750) where cust_id=3
+                                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> insert into surveyinfo(tot_amt) values(4750);
+insert into surveyinfo(tot_amt) values(4750)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SCOTT"."SURVEYINFO"."SR_NO") 
+
+
+SQL> spool off;

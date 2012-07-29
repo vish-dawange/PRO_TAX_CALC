@@ -1,0 +1,6 @@
+CUST_ID:LNAME:FNAME:MNAME:ADDR:SYEAR
+2: DAWNGE   : VISHAL   : SANJAY   : nashik :1992
+3: DESHA    : NACHI    : CHANDRA  : talegaon :1991
+1: EKHANDE  : DNYANESH : KACHARU  : pune :1993
+4: UGALE    : SATISH   : SAHEB    : akole :1992
+5: JADHAV   : MAYUR    : JAGAN    : nagpur :1997

@@ -1,0 +1,103 @@
+SQL> create table custinfo
+  2  (cust_id number(5) primary key,
+  3  name varchar2(30),
+  4  addr varchar2(30),
+  5  syear number(4));
+
+Table created.
+
+SQL> create table openplotinfo
+   (cust_id number(5) not null,
+    survey_no number(5) primary key,
+   plot_no number(4) not null,
+    reg_no varchar2(6) not null,
+    type varchar2(4) check(type in('A','B','C','D')),
+    area_sq_m number(8,2),
+    rate_per_sqm number(8,2),
+    zone_no number(3),
+   foreign key(cust_id)references custinfo);
+
+Table created.
+
+
+SQL> create table surveyinfo(
+    cust_id number(5) references custinfo,
+    sr_no number(5) not null,
+    zoneno number(3) not null,
+    area_sqm number(8,2),
+    type char(1) check (type in ('A','B','C')),
+    rooms number(2),
+    floor varchar2(10),
+    tot_amt number(9,2));
+
+Table created.
+
+SQL> create table restax(
+    rtax_no varchar2(6) primary key,
+    sr_no number(5) references surveyinfo,
+     tot_exp_rent number(9,2),
+    ann_rent number(9,2),
+    disc number(9,2),
+    ret_val number(9,2),
+    net_val number(9,2),
+     gen_tax number(8,2),
+    con_tax number(8,2),
+   state_edn number(8,2),
+    fire number(8,2),
+   tree number(8,2),
+    water number(8,2),
+    street number(8,2),
+    drainage number(8,2));
+
+Table created.
+
+
+SQL> create table taxcalinfo(
+    t_no number(5) primary key,
+    sr_no number(5) references surveyinfo,
+    cur_total number(6,2),
+    pending number(6,2),
+    tot_tax number(7,2));
+
+Table created.
+
+SQL> create table billinfo(
+    bill_id varchar2(6) primary key,
+    cust_id number(5) references custinfo,
+    insallment number(2),
+   final_tax number(7,2));
+
+Table created.
+
+ create table rate(
+  tax_id number(5) primary key,
+    tax_name varchar2
+    (30),
+    tax_rate number(8,2));
+
+Table created.
+
+SQL> create table comtax
+  2  (ctax_no varchar2(6) primary key,
+  3  sr_no number(5) references surveyinfo,
+  4  tot_exp_rent number(9,2),
+  5  ann_rent number(9,2),
+  6  disc number(9,2),
+  7  ret_val number(9,2),
+  8  net_val number(9,2),
+  9  gen_tax number(8,2),
+ 10  con_tax number(8,2),
+ 11  state_edn number(8,2),
+ 12  fire number(8,2),
+ 13  tree number(8,2),
+ 14  water number(8,2),
+ 15  street number(8,2),
+ 16  drainage number(8,2),
+ 17  eg_tax number(8,2));
+
+Table created.
+
+SQL> alter table surveyinfo
+  2  add(plot_no varchar2(6));
+
+Table altered.
