@@ -1,0 +1,162 @@
+SQL> ed newt.sql;
+
+SQL> start newt.sql;
+ 13  
+ 14  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> 
+SQL> 
+SQL> ed newt.sql;
+
+SQL> start newt.sql;
+
+Warning: Trigger created with compilation errors.
+
+SQL> show error;
+Errors for TRIGGER TRIG1:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+3/8      PLS-00103: Encountered the symbol "" when expecting one of the         
+         following:                                                             
+         := . ( @ % ;                                                           
+                                                                                
+4/10     PLS-00103: Encountered the symbol "" when expecting one of the         
+         following:                                                             
+         := . ( @ % ;                                                           
+                                                                                
+5/11     PLS-00103: Encountered the symbol "" when expecting one of the         
+         following:                                                             
+         := . ( @ % ;                                                           
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+                                                                                
+8/4      PLS-00103: Encountered the symbol ";" when expecting one of the        
+         following:                                                             
+         if                                                                     
+                                                                                
+SQL> *
+SP2-0226: Invalid line number 
+SQL> ed newt.sql
+
+SQL> start newt.sql
+
+Trigger created.
+
+SQL> exec trig1
+BEGIN trig1; END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00201: identifier 'TRIG1' must be declared 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> insert into surveyinfo values(4,210,9,400,'e',4,'gr',5678);
+insert into surveyinfo values(4,210,9,400,'e',4,'gr',5678)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> get C:\oracle\ora92\bin\newt.sql
+  1  create or replace trigger trig1
+  2  before insert on surveyinfo for each row 
+  3  begin
+  4  	if :new.type!='a' then
+  5  	raise_application_error(-20001,'Invalid Type.');
+  6  	end if;
+  7* end;
+  8  /
+
+Trigger created.
+
+SQL> select * from surveyinfo;
+
+   CUST_ID      SR_NO     ZONENO   AREA_SQM T      ROOMS FLOOR         TOT_AMT  
+---------- ---------- ---------- ---------- - ---------- ---------- ----------  
+         3        200         10        500 C          2 Ground           3150  
+         2        201         11        600 B          3 first            4320  
+         5        202         10        800 A          4 second           7600  
+         4        205         10        500 D          3 ground           3450  
+
+SQL>  insert into surveyinfo values(1,,210,9,400,'e',4,'gr',5678);
+ insert into surveyinfo values(1,,210,9,400,'e',4,'gr',5678)
+                                 *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL>  insert into surveyinfo values(1,210,9,400,'e',4,'gr',5678);
+ insert into surveyinfo values(1,210,9,400,'e',4,'gr',5678)
+             *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL>  insert into surveyinfo values(1,210,9,400,'a',4,'gr',5476);
+ insert into surveyinfo values(1,210,9,400,'a',4,'gr',5476)
+             *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> insert into surveyinfo(cust_id,sr_no,zoneno,area_sqm,type,rooms,floor,tot_amt) values(1,210,9,400,'e',4,'gr',5678);
+insert into surveyinfo(cust_id,sr_no,zoneno,area_sqm,type,rooms,floor,tot_amt) values(1,210,9,400,'e',4,'gr',5678)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> get C:\oracle\ora92\bin\newt.sql
+  1  create or replace trigger trig1
+  2  before insert on surveyinfo for each row 
+  3  begin
+  4  	if :new.type!='a' then
+  5  	raise_application_error(-20001,'Invalid Type.');
+  6  	end if;
+  7* end;
+  8  /
+
+Trigger created.
+
+SQL> select * from surveyinfo;
+
+   CUST_ID      SR_NO     ZONENO   AREA_SQM T      ROOMS FLOOR         TOT_AMT  
+---------- ---------- ---------- ---------- - ---------- ---------- ----------  
+         3        200         10        500 C          2 Ground           3150  
+         2        201         11        600 B          3 first            4320  
+         5        202         10        800 A          4 second           7600  
+         4        205         10        500 D          3 ground           3450  
+
+SQL> insert into surveyinfo values(1,210,12,400,'b',3,'ground',3245);
+insert into surveyinfo values(1,210,12,400,'b',3,'ground',3245)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> create or replace trigger t1
+  2  before insert on surveyinfo for each row
+  3  begin
+  4  if :new.type!='a' then
+  5  raise_application_error(-20003,'Error.........');
+  6  end if;
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL>  insert into surveyinfo values(1,210,12,400,'b',3,'ground',3245);
+ insert into surveyinfo values(1,210,12,400,'b',3,'ground',3245)
+             *
+ERROR at line 1:
+ORA-04098: trigger 'SCOTT.SHALA' is invalid and failed re-validation 
+
+
+SQL> spool off;

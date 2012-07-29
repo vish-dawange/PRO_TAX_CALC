@@ -1,0 +1,58 @@
+SQL> desc custinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                   NOT NULL NUMBER(5)
+ NAME                                               VARCHAR2(30)
+ ADDR                                               VARCHAR2(30)
+ SYEAR                                              NUMBER(4)
+
+SQL> desc openplotinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                            NUMBER(5)
+ SURVEY_NO                                 NOT NULL NUMBER(5)
+ PLOT_NO                                            NUMBER(4)
+ REG_NO                                             VARCHAR2(6)
+ TYPE                                               CHAR(1)
+ AREA_SQ_M                                          NUMBER(8,2)
+ RATE_PER_SQM                                       NUMBER(8,2)
+ ZONE_NO                                            NUMBER(3)
+ EFF_FRM                                            VARCHAR2(15)
+ TOTAL_TAX                                          NUMBER(8,2)
+
+SQL> desc surveyinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_ID                                            NUMBER(5)
+ SR_NO                                     NOT NULL NUMBER(5)
+ ZONENO                                             NUMBER(3)
+ AREA_SQM                                           NUMBER(8,2)
+ TYPE                                               CHAR(1)
+ ROOMS                                              NUMBER(2)
+ FLOOR                                              VARCHAR2(10)
+
+SQL> desc rate;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TAX_ID                                    NOT NULL NUMBER(5)
+ TAX_NAME                                           VARCHAR2(30)
+ TAX_RATE                                           NUMBER(8,2)
+
+SQL> desc billinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BILL_ID                                   NOT NULL VARCHAR2(6)
+ CUST_ID                                            NUMBER(5)
+ INSTALMENTS                                        NUMBER(2)
+ FINAL_TAX                                          NUMBER(7,2)
+
+SQL> desc taxcalinfo;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ T_NO                                      NOT NULL NUMBER(5)
+ SR_NO                                              NUMBER(5)
+ CUR_TOTAL                                          NUMBER(6,2)
+ PENDING                                            NUMBER(6,2)
+ TOT_TAX                                            NUMBER(7,2)
+
+SQL> spool off;

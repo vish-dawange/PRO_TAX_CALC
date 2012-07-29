@@ -1,0 +1,13 @@
+
+SQL> create or replace procedure insert_bill
+  2  (bill_id in varchar2,
+  3  cust_id in number,
+  4  final_tax in number)
+  5  is
+  6  begin
+  7  insert into billinfo(bill_id,cust_id,final_tax)
+  8  values(bill_id,cust_id,final_tax);
+  9  end;
+ 10  /
+
+Procedure created.

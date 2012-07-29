@@ -1,0 +1,24 @@
+		PROPERTY TAX CALCULATION SYSTEM
+			Developed by:
+			1.Vishal Dawange
+			2.Dnyaneshwar Ekhande
+			3.Nachiket Deshpande
+
+  This system provides the feature about:
+  1.Admin Login
+  2.Customer Login
+
+
+1.Admin Login:-
+		i. To make a new entry,survey engineer can use admin login.After login it will show 
+		    the menu to add the new user information,update the database of customer in case of user change.
+
+		ii.Then through the update tax rate option,the admin can change the tax rate.
+
+		iii.We are also giving the priviledge to admin if we want to see previous owner information and also if 
+		     he/she wants to see all the user database it is also available in our system.
+
+
+2.Customer Login:-
+		    This system is not only about the administrator it also gives the customer to see their own 
+                           database.The user also can view the tax rate.Also the user can view his/her bill.
